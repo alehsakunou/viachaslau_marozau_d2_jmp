@@ -12,8 +12,6 @@ import java.util.Scanner;
  */
 public class Runner
 {
-    private static final String jarFilePath = "../lib/mathActions.jar";
-
     private static Scanner inputScan;
     private static String[] mathActionArr;
     private static String[] repeatArr;
@@ -31,6 +29,9 @@ public class Runner
         inputScan = new Scanner(System.in);
         mathActionArr = new String[] {"Add", "Multiply", "Subtract", "Divide"};
         repeatArr = new String[] {"Yes", "No"};
+        String path = System.getProperty("user.dir");
+        final String jarPath = "/lib/mathActions.jar";
+        String jarFilePath = path + jarPath;
         File jarFile = new File(jarFilePath);
         URL jarFileURL = null;
         try
@@ -50,9 +51,17 @@ public class Runner
         boolean isRepeat = false;
         do
         {
-            MathAction action = doCheckAction();
-            double result = processMathAction(action);
-            System.out.println(String.format("Result: %f:6:3", result));
+            try
+            {
+                MathAction action = doCheckAction();
+                double result = processMathAction(action);
+                System.out.println(String.format("Result: %f", result));
+            }
+            catch (RuntimeException e)
+            {
+                System.out.println("We have an isssue: " + e.getMessage());
+
+            }
             isRepeat = doRepeat();
         }
         while (isRepeat);
@@ -60,7 +69,8 @@ public class Runner
 
     private static void doIntroduce()
     {
-        System.out.println("This is classloading task:\nYou check arithmetic action.\nThen we load it from jar file and execute.\nEnjoy)))\n\n");
+        System.out.println(
+            "This is classloading task:\nYou check arithmetic action.\nThen we load it from jar file and execute.\nEnjoy)))\n\n");
     }
 
     private static MathAction doCheckAction()
