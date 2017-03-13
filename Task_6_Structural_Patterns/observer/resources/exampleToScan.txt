@@ -1,0 +1,7 @@
+Write a program that scans a given text file.
+The program will notify any registered listeners with each word scanned
+The types of listeners required are:
+1 Word counter – that simply counts the total words sent to it
+2 Number counter – that count the total numbers of string that represents numbers (for example "345", "0")
+3 Longest word keeper – which keeps the last longest word sent to it
+4 Reverse word – which reverse chars order in every given word
