@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add new reservation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Add Reservation</h1>
+<form method="post" action="/addReservation">
+    <label for="firstName">First name:</label>
+    <input type="text" id="firstName" name="firstName" placeholder="type first name"/>
+    <br/>
+    <label for="lastName">Last name:</label>
+    <input type="text" id="lastName" name="lastName" placeholder="type last name"/>
+    <br/>
+    <br/>
+    <label for="movieTitle">Movie title:</label>
+    <input type="text" id="movieTitle" name="movieTitle" placeholder="type movie title"/>
+    <br/>
+    <label for="movieDate">Movie date:</label>
+    <input type="text" id="movieDate" name="movieDate" placeholder="yyyy-MM-dd hh:mm"/>
+    <br/>
+    <label for="number">Place:</label>
+    <input type="text" id="number" name="number" placeholder="type number"/>
+    <input type="text" id="row" name="row" placeholder="type row"/>
+    <br/>
+    <br/>
+    <br/>
+    <label for="price">Price:</label>
+    <input type="text" id="price" name="price" placeholder="0.00"/>
+    <br/>
+    <input type="submit" value="send"/>
+</form>
+</body>
+</html>
+
