@@ -7,11 +7,20 @@
 <body>
 <h1>Users:</h1>
 
+
+<table style="width:100%">
 <#list usersArray as user>
-    <p>${user.name}  ${user.surname}
-        <#else>
-    <p>No users
+<tr>
+<th>${user.name}</th>
+<th>${user.surname}</th>
+</tr>
+<#else>
+<tr>
+<th>No users</th>
+</tr>
 </#list>
+</table>
+
 
 <br/>
 <br/>
