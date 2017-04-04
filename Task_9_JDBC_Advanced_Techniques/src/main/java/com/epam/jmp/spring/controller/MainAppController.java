@@ -66,7 +66,7 @@ public class MainAppController
         User[] users = manageDatabaseFacadeService
             .searchUsersByFriendsAndLices(friendshipNumAsInt, likeNumAsInt);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("select-from-database-result.ftl");
+        modelAndView.setViewName("select-from-database-result");
         modelAndView.addObject("usersArray",users);
         return modelAndView;
     }

@@ -39,4 +39,11 @@
         <property name="username" value=""/>
         <property name="password" value=""/>
     </bean>
+    <!-- Initialization for freemarker templates -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="WEB-INF/templates/" />
+    </bean>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property  name="suffix"  value=".ftl"  />
+    </bean>
 </beans>
