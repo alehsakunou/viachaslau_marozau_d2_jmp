@@ -1,46 +1,41 @@
-package com.epam.jmp.spring.service.impl;
+package com.epam.jmp.spring.dao.impl;
 
 import com.epam.jmp.spring.dao.interfaces.UserDAO;
 import com.epam.jmp.spring.model.Role;
 import com.epam.jmp.spring.model.User;
 import com.epam.jmp.spring.model.UserInfo;
-import com.epam.jmp.spring.service.interfaces.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
 
-public class UserServiceImpl implements UserService
+public class PostgreSQLUserDAOImpl implements UserDAO
 {
-    @Autowired
-    private UserDAO userDAO;
-
     @Override
     public User addUser(String login, String password, Role role, long userInfoId)
     {
-        return userDAO.addUser(login, password, role, userInfoId);
+        return null;
     }
 
     @Override
     public UserInfo addUserInfo(String name, String surname, String email, String phone, Timestamp birthdate)
     {
-        return userDAO.addUserInfo(name, surname, email, phone, birthdate);
+        return null;
     }
 
     @Override
     public User getUser(String login, String password)
     {
-        return userDAO.getUser(login, password);
+        return null;
     }
 
     @Override
     public UserInfo getUserInfo(User user)
     {
-        return userDAO.getUserInfo(user);
+        return null;
     }
 
     @Override
     public User removeUser(String login, String password)
     {
-        return userDAO.removeUser(login, password);
+        return null;
     }
 }

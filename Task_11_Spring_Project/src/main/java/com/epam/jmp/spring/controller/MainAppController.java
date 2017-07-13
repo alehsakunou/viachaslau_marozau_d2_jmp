@@ -1,10 +1,11 @@
 package com.epam.jmp.spring.controller;
 
+import com.epam.jmp.spring.model.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MainAppController
@@ -18,9 +19,18 @@ public class MainAppController
         return "start-page";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage()
+    @RequestMapping(value = "/main")
+
+    public String mainPage(@ModelAttribute User user)
     {
-        return "login-page";
+        if (user == null)
+        {
+            return "start-page";
+        }
+        else
+        {
+            return "main-page";
+        }
     }
+
 }
