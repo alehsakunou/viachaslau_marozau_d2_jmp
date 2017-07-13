@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Select users</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Select users with:</h1>
+<br/>
+<br/>
+<form method="post" action="/selectFromDatabase">
+    <label for="friendshipNum">Number of friendships:</label>
+    <input type="text" id="friendshipNum" name="friendshipNum" placeholder="type number of friendships"/>
+    <br/>
+    <label for="likeNum">Number of likes:</label>
+    <input type="text" id="likeNum" name="likeNum" placeholder="type number of likes"/>
+    <br/>
+    <br/>
+    <input type="submit" value="send"/>
+</form>
+</body>
+</html>
+
