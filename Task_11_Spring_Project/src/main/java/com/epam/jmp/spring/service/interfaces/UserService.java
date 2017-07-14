@@ -16,5 +16,5 @@ public interface UserService
 
     UserInfo getUserInfo(User user);
 
-    User removeUser (String login, String password);
+    void removeUser (String login, String password);
 }

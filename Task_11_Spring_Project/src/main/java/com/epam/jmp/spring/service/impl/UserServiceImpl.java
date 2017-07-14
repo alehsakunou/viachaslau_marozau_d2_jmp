@@ -1,6 +1,6 @@
 package com.epam.jmp.spring.service.impl;
 
-import com.epam.jmp.spring.dao.interfaces.UserDAO;
+import com.epam.jmp.spring.repositories.interfaces.UserRepository;
 import com.epam.jmp.spring.model.Role;
 import com.epam.jmp.spring.model.User;
 import com.epam.jmp.spring.model.UserInfo;
@@ -12,35 +12,35 @@ import java.sql.Timestamp;
 public class UserServiceImpl implements UserService
 {
     @Autowired
-    private UserDAO userDAO;
+    private UserRepository userRepository;
 
     @Override
     public User addUser(String login, String password, Role role, long userInfoId)
     {
-        return userDAO.addUser(login, password, role, userInfoId);
+        return userRepository.addUser(login, password, role, userInfoId);
     }
 
     @Override
     public UserInfo addUserInfo(String name, String surname, String email, String phone, Timestamp birthdate)
     {
-        return userDAO.addUserInfo(name, surname, email, phone, birthdate);
+        return userRepository.addUserInfo(name, surname, email, phone, birthdate);
     }
 
     @Override
     public User getUser(String login, String password)
     {
-        return userDAO.getUser(login, password);
+        return userRepository.getUser(login, password);
     }
 
     @Override
     public UserInfo getUserInfo(User user)
     {
-        return userDAO.getUserInfo(user);
+        return userRepository.getUserInfo(user);
     }
 
     @Override
-    public User removeUser(String login, String password)
+    public void removeUser(String login, String password)
     {
-        return userDAO.removeUser(login, password);
+        userRepository.removeUser(login, password);
     }
 }

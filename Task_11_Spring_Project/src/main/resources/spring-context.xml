@@ -1,49 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <!-- Initialization for facade service -->
-    <bean id="manageDatabaseFacadeService" class="com.epam.jmp.spring.service.impl.SimpleManageDatabaseFacadeServiceImpl">
-        <property name="tableDAO" ref="tableDAO"/>
-        <property name="userDAO" ref="userDAO"/>
-        <property name="friendshipDAO" ref="friendshipDAO"/>
-        <property name="postDAO" ref="postDAO"/>
-        <property name="likeDAO" ref="likeDAO"/>
-    </bean>
+    <!--@Transaction annotation support -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <!-- Initialization for DAO -->
-    <bean id="userDAO" class="com.epam.jmp.spring.dao.impl.SQLiteUserDAOImpl">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-    <bean id="friendshipDAO" class="com.epam.jmp.spring.dao.impl.SQLiteFriendshipDAOImpl">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-    <bean id="likeDAO" class="com.epam.jmp.spring.dao.impl.SQLiteLikeDAOImpl">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-    <bean id="postDAO" class="com.epam.jmp.spring.dao.impl.SQLitePostDAOImpl">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-    <bean id="tableDAO" class="com.epam.jmp.spring.dao.impl.SQLiteTableDAOImpl">
-        <property name="dataSource" ref="dataSource"/>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
     </bean>
 
-    <!-- Initialization for data source -->
-    <bean id="dataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.sqlite.JDBC"/>
-        <property name="url" value="jdbc:sqlite:SQLiteDatabase.s3db"/>
-        <property name="username" value=""/>
-        <property name="password" value=""/>
+    <!-- EntityManagerFactory -->
+    <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
+        <property name="packagesToScan"
+                  value="com.epam.jmp.spring"/>
     </bean>
-    <!-- Initialization for freemarker templates -->
-    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="WEB-INF/templates/" />
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:5432/testdb" />
+        <property name="username" value="root" />
+        <property name="password" value="admin" />
     </bean>
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property  name="suffix"  value=".ftl"  />
-    </bean>
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.epam.jmp.spring"/>
+
+    <!-- Need for Repository abstraction -->
+    <jpa:repositories base-package="com.epam.jmp.spring.repositories.interfaces" entity-manager-factory-ref="emf"
+                      transaction-manager-ref="transactionManager"/>
+
 </beans>
